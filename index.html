@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js
+    " ></script>
+
+</head>
+<style>
+    .todobtn{
+        display: flex;
+        gap: 10px;
+    }
+    .sk{
+        display: flex;
+        gap: 10px;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+    .modal{
+    position: absolute;
+    z-index: 1000;
+    left: 40%;
+    top: 10%;
+    display: none;
+    gap: 10px;
+    padding: 30px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;;
+  }
+</style>
+<script>
+    
+     $(document).ready(()=>{
+        let arr =[];
+        $('.change').click(function(){
+            let a = $(".val").text();
+            a=Number(a)+1;
+            $('.val').text(a);
+
+            
+
+        })
+        $(".minus").click(()=>{
+            let a = $('.val').text();
+            if(Number(a)>0){
+                $('.val').text(Number(a)-1)
+            }
+        });
+        $('#add').click(()=>{
+            let a = $("#inp").val();
+            
+          
+           
+            
+            if(a.length>0){
+                $('#container').append(`<div class='sk' > <p>${a}</p><button class='tb' >Delete</button> <button class='edit'>Edit</button></div>`);
+              
+            }
+          
+            
+        })
+        function sk(){
+            console.log(arr);
+            $.each(arr,function(i,val){
+              
+                $('#container').append(val);
+            })
+
+        }
+       
+        
+        $('#pagi').on('click',()=>{
+           
+            window.location.href='pagi.html'
+        });
+        $('body').on('click','.tb',function(){
+            console.log('helo')
+            $(this).parents('div.sk').remove();
+
+        })
+        $('body').on('click','.edit',function(){
+            $('.modal').css('display','block');
+            
+            $('.change').click(function(){
+                    a = $('.inpchange').val();
+                    // let b=$(this).parents('body').find('.sk p').html();
+                    // console.log(b)
+                    $(this).parents('body').find('.sk p').text(a);
+
+                    $('.modal').css('display','none');
+                    
+                    
+                
+                    
+                })
+            
+        })
+
+     })
+</script>
+<body>
+    <span><h1>count</h1><span class="val" >0</span></span>
+    <div>
+        <button class="change" >Increment</button>
+        <button class="minus" >Decrement</button>
+    </div>
+    
+    <div style="display: flex;gap:'10px'" >
+        <input type="text" id="inp" />
+        <button id="add" >+</button>
+    </div>
+    <div id="container"   >
+
+    </div>
+    <button id="pagi" >next page</button>
+    <div>
+        <div class="modal" >
+            <input type="text" class="inpchange" />
+            <button class="change" >change</button>
+        </div>
+    </div>
+</body>
+</html>
